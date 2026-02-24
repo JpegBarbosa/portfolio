@@ -1,0 +1,1042 @@
+/* =========================================
+   1. FONT DEFINITIONS (LOWERCASE PATHS)
+   ========================================= */
+
+/* Greg */
+@font-face {
+  font-family: "Greg Variable";
+  /* Ensure these match your actual lowercase files exactly */
+  src:
+    url("assets/fonts/greg.woff2") format("woff2"),
+    url("assets/fonts/greg.ttf") format("truetype");
+  font-weight: 400 800;
+  font-style: normal;
+}
+
+/* Viariavel */
+@font-face {
+  font-family: "Viariavel Variable";
+  src:
+    url("assets/fonts/viariavel.woff2") format("woff2"),
+    url("assets/fonts/viariavel.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+/* Recreation */
+@font-face {
+  font-family: "Recreation Variable";
+  src:
+    url("assets/fonts/recreation.woff2") format("woff2"),
+    url("assets/fonts/recreation.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+/* =========================================
+   2. FONT ASSIGNMENT CLASSES
+   ========================================= */
+.font-greg {
+  font-family: "Greg Variable", sans-serif !important;
+}
+
+.font-viariavel {
+  font-family: "Viariavel Variable", sans-serif !important;
+}
+
+.font-recreation {
+  font-family: "Recreation Variable", sans-serif !important;
+}
+
+/* =========================================
+   VARIAVEIS DE COR (Dark/Light Mode)
+   ========================================= */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --menu-bg: #000000;
+  --menu-text: #ffffff;
+  --menu-hover-bg: #000000;
+  --menu-hover-text: #ff00bf;
+  --badge-bg: #e0e0e0;
+  --badge-text: #000;
+  --overlay-text: #fff;
+  --footer-bg: #d8ccff;
+  --footer-text: #222;
+  --submenu-bg: #262626;
+  --submenu-text: #fff;
+  --submenu-hover-bg: #000000;
+  --submenu-hover-text: #ff00bf;
+
+  /* NOVAS VARIAVEIS: Configuração de Espaçamento e Tamanho */
+  --menu-padding: 5px 7px;
+  --cv-badge-size: 35px;
+  --menu-height: 35px;
+
+  /* NOVAS VARIAVEIS: Cores das Tags (para uso no JS) */
+  --color-tag-main: #4100f5;
+  --color-tag-1: #00ff00;
+  --color-tag-2: #64686a;
+
+  /* Se o menu é preto, precisamos de INVERTER o ícone preto para ficar BRANCO */
+  --icon-filter: invert(1);
+
+  /* Filtro para transformar preto na tua cor rosa de hover (#ff00bf) */
+  --icon-hover-filter: invert(13%) sepia(94%) saturate(5372%) hue-rotate(313deg)
+    brightness(92%) contrast(116%);
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --menu-bg: #ffffff;
+  --menu-text: #000000;
+  --menu-hover-bg: #0000ff;
+  --menu-hover-text: #ffffff;
+  --badge-bg: #333333;
+  --badge-text: #fff;
+  --footer-bg: #333333;
+  --footer-text: #d8ccff;
+  --submenu-bg: #d0d0d0;
+  --submenu-text: #121212;
+  --submenu-hover-bg: #ff5f1f;
+  --submenu-hover-text: #ffffff;
+
+  --icon-filter: invert(0);
+}
+
+/* =========================================
+   1. BASE STYLES
+   ========================================= */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+
+  background: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+/* Force ONLY paragraphs to use PT Mono */
+p {
+  font-family: "PT Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  white-space: normal; /* Ensure text wraps to the next line */
+  text-align: left; /* No justification */
+  word-break: normal; /* Prevent mid-word breaks */
+}
+
+.news-section,
+.about-section,
+.gif-section,
+.scroll-section,
+.spacer-section {
+  background: var(--bg-color);
+}
+
+.about-section h2,
+.about-section p {
+  color: var(--text-color);
+}
+
+/* =========================================
+   2. HEADER & MENU
+   ========================================= */
+.header {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 6px;
+  background: none;
+  z-index: 1000;
+  flex-wrap: wrap;
+  width: auto;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.menu-item {
+  background: var(--menu-bg);
+  color: var(--menu-text);
+  padding: var(--menu-padding);
+  text-align: center;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.2s;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  border: none;
+  height: var(--menu-height);
+  box-sizing: border-box;
+}
+
+#menu-about-me {
+  border-radius: 50px;
+}
+
+.menu-item:hover {
+  background: var(--menu-hover-bg);
+  color: var(--menu-hover-text);
+  transform: translateY(-1px);
+}
+
+.menu-item a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.menu-group-links,
+.menu-group-tools {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.nav-icon {
+  width: 18px;
+  height: 18px;
+
+  /* Removemos o fill: currentColor pois não funciona em <img> */
+  /* fill: currentColor;  <-- APAGA ISTO */
+
+  /* Adicionamos o filtro */
+  filter: var(--icon-filter);
+  transition: transform 0.2s;
+}
+
+/* Adiciona esta regra para mudar a cor no HOVER */
+.menu-item:hover .nav-icon {
+  filter: var(--icon-hover-filter);
+}
+
+.hide-on-hover {
+  transition: opacity 0.3s;
+}
+
+.menu-item.menu4 {
+  padding: 0;
+  width: var(--cv-badge-size);
+  height: var(--cv-badge-size);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu-item.menu4 a {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+/* =========================================
+   3. SUBMENU (Fixo Desktop)
+   ========================================= */
+.submenu {
+  position: fixed;
+  top: 60px;
+  left: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4px;
+  z-index: 999;
+  pointer-events: none;
+  max-width: 90vw;
+}
+
+.submenu-box {
+  background: var(--submenu-bg);
+  color: var(--submenu-text);
+  padding-left: 7px;
+  padding-right: 7px;
+  height: var(--menu-height);
+  display: inline-flex;
+  align-items: center;
+  border-radius: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.1s,
+    background 0.2s,
+    color 0.2s;
+  pointer-events: auto;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.submenu-box:hover {
+  background: var(--submenu-hover-bg);
+  color: var(--submenu-hover-text);
+}
+
+/* =========================================
+   4. INDEX & NEWS SECTION (Fixed Desktop)
+   ========================================= */
+.main-container {
+  width: 100%;
+}
+
+.fullscreen-section {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
+  position: relative;
+  z-index: 20; /* ADDED: Higher than footer (30) to scroll on top */
+  background-color: inherit;
+  overflow: hidden;
+}
+
+.fullscreen-section img,
+.fullscreen-section video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.banner-main {
+  background: #ff5e3a;
+}
+.banner-1 {
+  background: #00bfff;
+}
+.banner-2 {
+  background: #3cb371;
+}
+
+.overlay h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.overlay p {
+  margin: 5px 0 0;
+  font-size: 1rem;
+}
+
+.grid-item .overlay p:nth-child(4) {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background-color: var(--menu-hover-bg);
+  color: var(--menu-hover-text);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* =========================================
+   6. CAROUSEL SECTION - FULL ALIGNMENT FIX
+   ========================================= */
+
+.carousel-section {
+  width: 100%;
+  height: 100vh; /* Ensures it occupies the full viewport height */
+  min-height: 100vh;
+  background: var(--bg-color);
+  position: relative; /* Anchor for absolute children */
+  overflow: hidden;
+  z-index: 10;
+  display: block;
+}
+
+/* SIDEBAR: Absolute vertical centering at the left margin */
+.carousel-nav-sidebar {
+  position: absolute;
+  left: 10px; /* Aligned with 'PORTFOLIO' button */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: row; /* Arrows on the same line */
+  gap: 8px;
+  z-index: 1100;
+  pointer-events: auto;
+}
+
+/* WRAPPER: Occupies the full section and centers the track */
+.carousel-interaction-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+  pointer-events: none;
+}
+
+/* TRACK: This is the invisible 'dot' in the center that items rotate around */
+.carousel-track {
+  position: relative;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* CAROUSEL ITEM: Rigid container to prevent GIF from jumping */
+.carousel-item {
+  position: absolute;
+  width: 180px;
+  height: 101px; /* 16:9 Aspect Ratio */
+  left: -90px; /* Offset by half width to center on track origin */
+  top: -50px; /* Offset by half height to center on track origin */
+
+  cursor: pointer;
+  transform-style: flat;
+  pointer-events: auto;
+  will-change: transform;
+  text-decoration: none;
+}
+
+/* Images: Locked inside the item container */
+.carousel-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.carousel-item .c-static {
+  opacity: 1;
+  z-index: 1;
+}
+.carousel-item .c-gif {
+  opacity: 0;
+  z-index: 2;
+}
+
+.carousel-item:hover .c-static {
+  opacity: 0;
+}
+.carousel-item:hover .c-gif {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .carousel-item {
+    width: 120px;
+  }
+  .carousel-section {
+    perspective: 800px;
+  }
+}
+
+/* =========================================
+   5. PROJECT 1 SPLIT LAYOUT
+   ========================================= */
+.split-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.gif-section {
+  flex: 1;
+  position: relative; /* Necessário para o z-index funcionar */
+  overflow: hidden;
+
+  z-index: 40; /* CAMADA DE TOPO (40 > 30) - Tapa o rodapé */
+
+  background: var(--bg-color); /* Garante que o fundo não é transparente */
+}
+
+.fixed-gif,
+.fixed-video {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+.scroll-section {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  z-index: 11;
+  background: var(--bg-color);
+  box-sizing: border-box;
+}
+
+.scroll-content {
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.scroll-content h1 {
+  font-size: 1.5rem;
+  margin: 30px 0 20px 0;
+  font-weight: normal;
+  color: var(--text-color);
+  text-transform: uppercase;
+}
+.scroll-content h1:first-of-type {
+  margin-top: 0;
+}
+
+.scroll-content .h1-large {
+  font-size: 36px;
+  font-weight: 200;
+  margin: 0;
+}
+
+.scroll-content p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+  color: var(--text-color);
+}
+
+/* =========================================
+   6. EXTRA ELEMENTS & ABOUT
+   ========================================= */
+.floating-caption {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 10px 16px;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.3px;
+  z-index: 990;
+  pointer-events: none;
+}
+
+.caption-main {
+  background: var(--color-tag-main);
+  color: #fff;
+}
+.caption-1 {
+  background: var(--color-tag-1);
+  color: #fff; /* <--- MUDADO: De #000 para #fff */
+}
+.caption-2 {
+  background: var(--color-tag-2);
+  color: #fff;
+}
+
+.caption-proj {
+  background: #ffd700; /* Amarelo Ouro */
+  color: #000; /* Texto Preto */
+}
+
+.spacer-section {
+  width: 100%;
+  height: 30vh;
+  position: relative;
+  z-index: 5;
+}
+
+.about-header-styled {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 36px;
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-weight: normal;
+  color: var(--text-color);
+}
+
+.about-name {
+  font-weight: bold;
+}
+
+.about-badge {
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.5em;
+  font-weight: bold;
+  vertical-align: middle;
+  line-height: 1;
+  padding: 0;
+}
+
+.about-location {
+  font-weight: 300;
+  font-size: 0.8em;
+}
+
+.about-section {
+  width: 100%;
+  height: auto;
+  background: var(--bg-color);
+  padding: 20px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  z-index: 5;
+}
+
+.about-section h2 {
+  font-size: 1.5rem;
+  margin: 0 0 20px 0;
+  font-weight: normal;
+  color: var(--text-color);
+  text-transform: uppercase;
+}
+
+.about-section p {
+  max-width: 600px;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--text-color);
+}
+
+/* =========================================
+   FOOTER MARQUEE (INFINITE)
+   ========================================= */
+.fixed-footer-marquee {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 16px 0;
+  z-index: 15;
+  box-shadow: none;
+  text-transform: uppercase;
+}
+
+.marquee-track {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+}
+
+.marquee-content {
+  display: flex;
+  /* Animate content by -50% of its width */
+  animation: marquee-scroll 25s linear infinite;
+}
+
+.marquee-content span {
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding-right: 20px; /* Space between repeated blocks */
+}
+
+/* Move left by 50% (exactly one full set of text) */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.type-tester-wrapper {
+  width: 100%;
+  margin: 30px 0 30px 0;
+}
+
+.tester-controls {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 15px;
+  font-size: 11px;
+  font-family: "Inter", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 0 0 auto;
+}
+
+/* Range Slider Styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100px;
+  height: 2px;
+  background: var(--text-color);
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--bg-color);
+  border: 1px solid var(--text-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* --- NEW BUTTON STYLES --- */
+.buttons-container {
+  display: flex;
+  gap: 15px;
+  margin-left: auto; /* Pushes buttons to the right */
+  height: 38px;
+  align-items: flex-end;
+  padding-bottom: 5px;
+}
+
+.tester-btn {
+  background: none;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.tester-btn:hover {
+  opacity: 0.7;
+}
+
+/* ACTIVE STATE: Yellow Text */
+.tester-btn.active {
+  color: #ffd700; /* Yellow from your gif caption */
+}
+
+/* MAIN INPUT */
+.tester-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--text-color);
+  font-size: 50px;
+  height: 70px;
+  text-align: right;
+  font-family: inherit;
+  overflow-x: auto;
+  white-space: nowrap;
+  /* Ensure smooth transition for manual slider dragging */
+  transition: font-variation-settings 0.1s linear;
+}
+
+.tester-input::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================
+   PROJECT MEDIA CONTAINERS
+   ========================================= */
+
+/* Base wrapper for vertical spacing */
+/* "Half of the padding on top and bottom" (Parent has 20px, so we use 10px) */
+.media-block {
+  width: 100%;
+  margin: 10px 0;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* --- TYPE 1: Single Full-Width Image --- */
+.media-single img,
+.media-single video {
+  width: 100%;
+  height: auto; /* Maintains original aspect ratio */
+  display: block; /* Removes accidental whitespace below images */
+  object-fit: cover;
+}
+
+/* --- TYPE 2: Double Image Row --- */
+.media-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* CRITICAL: Aligns both images to the TOP */
+  justify-content: space-between; /* Spreads them out */
+  gap: 10px; /* Space between the two images */
+  width: 100%;
+}
+
+.media-col {
+  display: flex;
+  flex-direction: column;
+  /* 'flex' value will be set inline in HTML for customization */
+  overflow: hidden; /* Ensures content respects the border radius/width */
+}
+
+.media-col img,
+.media-col video {
+  width: 100%; /* Expands to the border of its column */
+  height: auto; /* Maintains aspect ratio */
+  display: block;
+}
+
+.media-spacer-top {
+  margin-top: 60px; /* Adjust this value for desired space */
+}
+
+/* =========================================
+   TEXT SHAKE EFFECT
+   ========================================= */
+.char-wrapper {
+  display: inline-block;
+  white-space: pre; /* Preserves space width */
+  transform-origin: center center;
+  will-change: transform;
+  /* Prevent layout shift */
+  vertical-align: baseline;
+}
+
+/* Ensure spaces between words don't break layout flow */
+.char-space {
+  display: inline;
+  white-space: pre;
+}
+
+.char-word {
+  display: inline-block; /* Keeps the word as a single unit */
+  white-space: nowrap; /* Prevents letters within the word from splitting */
+}
+
+/* --- POSTERS GRID (4 COLUMNS) --- */
+.posters-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 Vertical Lines/Columns */
+  gap: 10px;
+  padding: 0 20px 100px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Poster Container: 50x70 Ratio */
+.poster-item {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 50 / 70;
+  background: var(--bg-color);
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+/* Layers: Media and Text */
+.poster-media,
+.poster-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Initially Show Image */
+.poster-media {
+  opacity: 1;
+  z-index: 2;
+}
+.poster-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Initially Hide Text */
+.poster-text {
+  opacity: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* HOVER EFFECT: Swap visibility */
+.poster-item:hover .poster-media {
+  opacity: 0;
+}
+.poster-item:hover .poster-text {
+  opacity: 1;
+}
+
+/* Responsive: 2 columns on mobile */
+@media (max-width: 900px) {
+  .posters-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================
+   7. MOBILE RESPONSIVE TWEAKS
+   ========================================= */
+@media (max-width: 900px) {
+  /* ... (Existing mobile styles) ... */
+
+  .header {
+    right: 10px;
+    left: auto;
+    top: 10px;
+    width: auto;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .menu,
+  .menu-group-links {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .menu-group-tools {
+    position: fixed;
+    bottom: 50px; /* Spacing from bottom */
+    right: 10px; /* Spacing from right */
+    left: auto; /* Do not stretch */
+    width: auto; /* Fit content */
+    background: transparent; /* TRANSPARENT CONTAINER */
+    color: var(--menu-text);
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+    align-items: center;
+    z-index: 1100;
+    gap: 6px; /* Match header gap */
+    border: none;
+    pointer-events: none; /* Let clicks pass through empty space */
+  }
+
+  /* Restore the BOX look for the individual buttons inside the transparent container */
+  .menu-group-tools .menu-item {
+    background: var(--menu-bg); /* Solid Box Background */
+    color: var(--menu-text);
+    padding: var(--menu-padding);
+    pointer-events: auto; /* Re-enable clicks on the buttons */
+    height: var(--menu-height);
+    width: auto; /* Fit to content/icon */
+    box-shadow: none; /* Add shadow if desired, but desktop is flat */
+  }
+
+  /* Ensure the circle button stays circular */
+  .menu-group-tools .menu-item.menu4 {
+    width: var(--cv-badge-size);
+    padding: 0;
+  }
+
+  /* --- SUBMENU (DROPDOWN STYLE) --- */
+  .submenu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align right */
+    position: fixed;
+    left: auto;
+    right: 10px;
+    /* Top is calculated in JS */
+    max-width: 60vw;
+    background: transparent;
+    gap: 5px;
+  }
+
+  .submenu-box {
+    width: auto; /* Fit content */
+    justify-content: flex-end; /* Align text right inside box */
+    text-align: right;
+  }
+
+  /* --- SPLIT CONTAINER: MUDAR PARA VERTICAL --- */
+  .split-container {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .gif-section {
+    height: 80vh; /* Ocupa 80% da altura do ecrã */
+    width: 100%;
+  }
+
+  .fixed-gif {
+    position: relative; /* Deixa de ser sticky (fixo) e passa a rolar */
+    height: 100%;
+    width: 100%;
+    top: auto;
+  }
+
+  .scroll-section {
+    width: 100%;
+    overflow-y: visible;
+    padding-top: 20px;
+
+    overflow-x: hidden; /* Garante que nada sai para os lados */
+    box-sizing: border-box; /* Reforço */
+  }
+
+  .caption-main {
+    bottom: 50px !important;
+  }
+
+  .slider-group {
+    display: none !important;
+  }
+
+  .buttons-container {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
