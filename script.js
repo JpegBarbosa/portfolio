@@ -18,7 +18,7 @@ let hideTimeouts = [];
 let isMobileMenuOpen = false;
 
 /* =========================================
-   1. MENU & SUBMENU LOGIC
+   1. MENU & SUBMENU LOGIC (FIXED CLICK)
    ========================================= */
 
 if (menu1 && submenu1) {
@@ -53,6 +53,9 @@ if (menu1 && submenu1) {
     showTimeouts.forEach((t) => clearTimeout(t));
     submenuBoxes.forEach((box, index) => {
       box.style.display = "inline-flex";
+      // ATIVA OS CLIQUES QUANDO O MENU APARECE
+      box.style.pointerEvents = "auto";
+
       const timeout = setTimeout(() => {
         box.style.opacity = 1;
       }, index * typingDelay);
@@ -71,6 +74,8 @@ if (menu1 && submenu1) {
 
     submenuBoxes.forEach((box) => {
       box.style.opacity = 0;
+      // DESATIVA OS CLIQUES IMEDIATAMENTE AO ESCONDER
+      box.style.pointerEvents = "none";
     });
     hideTimeouts.forEach((t) => clearTimeout(t));
   }
@@ -138,12 +143,27 @@ function translateContent(lang) {
   });
   document.documentElement.lang = lang;
 
-  // FIX: Re-initialize the shake effect because the text nodes were replaced
+  // Update the toggle icon to show the NEXT available language
+  const langIcon = document.querySelector("#lang-toggle .nav-icon");
+  if (langIcon) {
+    if (lang === "en") {
+      // Site is in English -> Show Portuguese flag to switch back
+      langIcon.src = "assets/icons/portuguese.svg";
+      langIcon.alt = "Português";
+    } else {
+      // Site is in Portuguese -> Show English flag to switch
+      langIcon.src = "assets/icons/english.svg";
+      langIcon.alt = "English";
+    }
+  }
+
+  // Re-initialize the shake effect because the text nodes were replaced
   if (window.initShake) {
     window.initShake();
   }
 }
 
+// Initialize on load
 translateContent(currentLang);
 
 if (langToggleBtn) {
@@ -288,13 +308,14 @@ window.addEventListener("scroll", updateMenuColorsOnScroll);
 window.addEventListener("load", updateMenuColorsOnScroll);
 
 /* =========================================
-   6. CAROUSEL LOGIC (3D RING + MANUAL NAV)
+   6. CAROUSEL LOGIC (3D RING + MANUAL NAV + FILTERING)
    ========================================= */
 const carouselTrack = document.querySelector(".carousel-track");
 const carouselItems = document.querySelectorAll(".carousel-item");
 const carouselSection = document.querySelector(".carousel-section");
 const btnPrev = document.getElementById("carousel-prev");
 const btnNext = document.getElementById("carousel-next");
+const filterBtns = document.querySelectorAll(".filter-btn"); // Added for filtering
 
 if (carouselTrack && carouselItems.length > 0 && carouselSection) {
   let isReactive = true;
@@ -307,6 +328,29 @@ if (carouselTrack && carouselItems.length > 0 && carouselSection) {
   let rotationOffset = 0;
   let currentRotation = 0;
   const angleStep = (Math.PI * 2) / carouselItems.length;
+
+  /* --- UPDATED: Category Filtering Logic --- */
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const filterValue = btn.getAttribute("data-filter");
+
+      carouselItems.forEach((item) => {
+        // Get the tags and convert to an array (split by space)
+        const itemCategories = item.getAttribute("data-category") || "";
+        const categoriesArray = itemCategories.split(" ");
+
+        // Check if it's "all" OR if the array contains the specific tag
+        if (filterValue === "all" || categoriesArray.includes(filterValue)) {
+          item.classList.remove("is-dimmed");
+        } else {
+          item.classList.add("is-dimmed");
+        }
+      });
+    });
+  });
 
   // Motion Toggle (if exists in your header)
   if (typeof menuMotionBtn !== "undefined" && menuMotionBtn) {
@@ -345,6 +389,7 @@ if (carouselTrack && carouselItems.length > 0 && carouselSection) {
     const rect = carouselSection.getBoundingClientRect();
     containerCenterX = rect.left + rect.width / 2;
     containerCenterY = rect.top + rect.height / 2;
+    maxRadius = Math.min(window.innerWidth, window.innerHeight) * 0.35; // Update radius on resize
   });
 
   let currentTiltX = 0,
@@ -369,8 +414,6 @@ if (carouselTrack && carouselItems.length > 0 && carouselSection) {
   }
 
   function animateCarousel() {
-    // lerpFactor: How fast the tilt/repulsion follows the mouse
-    // rotationLerp: How fast the ring spins when you click the buttons
     const lerpFactor = 0.2;
     const rotationLerp = 0.15;
     const radiusLerp = 0.15;
@@ -568,8 +611,9 @@ const targetSelectors = [
   ".scroll-content h1",
   ".about-section p",
   ".about-section h2",
-  ".fullscreen-section .floating-caption",
+  // ".fullscreen-section .floating-caption",
   ".about-header-styled",
+  ".editorial-text", // <--- ADICIONA ESTA LINHA AQUI
 ];
 
 let shakeChars = [];
@@ -681,3 +725,61 @@ function animateShake() {
 // Start everything
 initShake();
 animateShake();
+
+/* =========================================
+   9. PROFESSIONAL SMOOTH SCROLL & ZOOM (SPLIT-SCREEN READY)
+   ========================================= */
+
+// 1. Configurar o alvo do scroll (Janela ou a coluna de texto)
+const scrollContainer = document.querySelector(".scroll-section");
+const isMobile = window.innerWidth <= 900;
+
+// Só aplicamos o Lenis à coluna interna se for Desktop e a coluna existir
+const lenisOptions =
+  scrollContainer && !isMobile
+    ? {
+        wrapper: scrollContainer, // O contentor que tem o scroll
+        content: document.querySelector(".scroll-content"), // O conteúdo longo lá dentro
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      }
+    : {
+        // Configuração padrão para a página inicial ou Mobile
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      };
+
+const lenis = new Lenis(lenisOptions);
+
+// 2. Loop de animação
+function raf(time) {
+  lenis.raf(time);
+  applyScrollZoom();
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// 3. Função de Zoom (mantém-se igual, funciona em todo o lado)
+function applyScrollZoom() {
+  const visualContent = document.querySelectorAll(`
+    .fullscreen-section img, .fullscreen-section video,
+    .media-block img, .media-block video,
+    .poster-media img
+  `);
+
+  visualContent.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    if (rect.top < windowHeight && rect.bottom > 0) {
+      const scrolled = Math.max(
+        0,
+        Math.min(1, (windowHeight - rect.top) / (windowHeight + rect.height)),
+      );
+      const scale = 1.2 - scrolled * 0.2;
+      el.style.transform = `scale(${scale.toFixed(4)})`;
+    }
+  });
+}
