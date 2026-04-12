@@ -39,7 +39,7 @@
             title="Translate PT/EN"
           >
             <img
-              src="assets/icons/translate.svg"
+              src="assets/icons/English.png"
               class="nav-icon"
               alt="Translate"
             />
@@ -53,8 +53,12 @@
             <img src="assets/icons/bulb.svg" class="nav-icon" alt="Theme" />
           </div>
 
-          <div class="menu-item menu4 hide-on-hover" title="Download CV">
-            <a href="#">
+          <div class="menu-item menu4 hide-on-hover" title="CV">
+            <a
+              href="assets/CV_PT.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src="assets/icons/document.svg" class="nav-icon" alt="CV" />
             </a>
           </div>
@@ -71,8 +75,8 @@
     </div>
 
     <div class="submenu" id="submenu1">
-      <a href="project1.html" class="submenu-box">BRANDING</a>
-      <a href="project2.html" class="submenu-box">EDITORIAL</a>
+      <a href="oficinal.html" class="submenu-box">OFICINAL</a>
+      <a href="ligatures_2026.html" class="submenu-box">LSS_2026</a>
       <a href="type.html" class="submenu-box">TYPE</a>
       <a href="project4.html" class="submenu-box">3D MODELING</a>
       <a href="project5.html" class="submenu-box">PHOTOS</a>
@@ -82,11 +86,13 @@
     </div>
 
     <main class="main-container">
-      <a href="project1.html" class="fullscreen-section banner-main">
-        <div class="floating-caption caption-main">A2</div>
+      <!-- HERO 1 -->
+      <a href="oficinal.html" class="fullscreen-section banner-main">
+        <div class="floating-caption caption-main">OFICINAL</div>
         <img src="assets/placeholder_gif.gif" alt="Main" />
       </a>
 
+      <!-- HERO 2 -->
       <a href="type.html" class="fullscreen-section banner-1">
         <div class="floating-caption caption-1">TYPEFACES</div>
         <video autoplay loop muted playsinline class="video-background">
@@ -95,14 +101,74 @@
         </video>
       </a>
 
+      <!-- HERO 3 -->
       <a href="project2.html" class="fullscreen-section banner-2">
         <div class="floating-caption caption-2">C2</div>
         <img src="assets/placeholder_gif.gif" alt="Main" />
       </a>
 
-      <section class="spacer-section"></section>
+      <section class="editorial-section">
+        <div class="editorial-container">
+          <p
+            class="editorial-text"
+            data-en="This portfolio showcases a selection of projects by João Barbosa, featuring..."
+            data-pt="Este portefólio apresenta uma seleção de projetos de João Barbosa, destacando..."
+          ></p>
+        </div>
+      </section>
 
       <section class="carousel-section" id="carousel-section">
+        <div class="carousel-filter-bar">
+          <button
+            class="menu-item filter-btn active"
+            data-filter="all"
+            data-en="ALL"
+            data-pt="TUDO"
+          >
+            ALL
+          </button>
+          <button
+            class="menu-item filter-btn"
+            data-filter="identity"
+            data-en="IDENTITY"
+            data-pt="IDENTIDADE"
+          >
+            IDENTITY
+          </button>
+          <button
+            class="menu-item filter-btn"
+            data-filter="print"
+            data-en="PRINT"
+            data-pt="IMPRESSÃO"
+          >
+            PRINT
+          </button>
+          <button
+            class="menu-item filter-btn"
+            data-filter="type"
+            data-en="TYPE"
+            data-pt="TIPOGRAFIA"
+          >
+            TYPE
+          </button>
+          <button
+            class="menu-item filter-btn"
+            data-filter="motion"
+            data-en="MOTION"
+            data-pt="ANIMAÇÃO"
+          >
+            MOTION
+          </button>
+          <button
+            class="menu-item filter-btn"
+            data-filter="3d"
+            data-en="3D MODELLING"
+            data-pt="MODELAÇÃO 3D"
+          >
+            3D MODELLING
+          </button>
+        </div>
+
         <div class="carousel-nav-sidebar">
           <div
             class="menu-item menu4 carousel-btn"
@@ -132,15 +198,40 @@
 
         <div class="carousel-interaction-wrapper">
           <div class="carousel-track">
-            <a href="project1.html" class="carousel-item">
+            <!-- PROJECT 1 -->
+            <a
+              href="oficinal.html"
+              class="carousel-item"
+              data-category="identity print motion 3d"
+            >
               <img class="c-static" src="assets/placeholder_img.webp" alt="" />
               <img class="c-gif" src="assets/placeholder_gif.gif" alt="" />
             </a>
-            <a href="project2.html" class="carousel-item">
-              <img class="c-static" src="assets/placeholder_img.webp" alt="" />
-              <img class="c-gif" src="assets/placeholder_gif.gif" alt="" />
+
+            <!-- PROJECT 2 -->
+            <a
+              href="ligatures_2026.html"
+              class="carousel-item"
+              data-category="identity print motion 3d"
+            >
+              <img
+                class="c-static"
+                src="assets/placeholder_img.webp"
+                alt="Ligatures Summer School 2026"
+              />
+              <img
+                class="c-gif"
+                src="assets/placeholder_gif.gif"
+                alt="Ligatures Summer School 2026"
+              />
             </a>
-            <a href="type.html" class="carousel-item">
+
+            <!-- PROJECT 3 -->
+            <a
+              href="type.html"
+              class="carousel-item"
+              data-category=" identity type print motion 3d"
+            >
               <img
                 class="c-static"
                 src="assets/placeholder_img.webp"
@@ -152,22 +243,32 @@
                 alt="Tipographic Work"
               />
             </a>
+
+            <!-- PROJECT 4 -->
             <a href="project4.html" class="carousel-item">
               <img class="c-static" src="assets/placeholder_img.webp" alt="" />
               <img class="c-gif" src="assets/placeholder_gif.gif" alt="" />
             </a>
+
+            <!-- PROJECT 5 -->
             <a href="project5.html" class="carousel-item">
               <img class="c-static" src="assets/placeholder_img.webp" alt="" />
               <img class="c-gif" src="assets/placeholder_gif.gif" alt="" />
             </a>
+
+            <!-- PROJECT 6 -->
             <a href="project6.html" class="carousel-item">
               <img class="c-static" src="assets/placeholder_img.webp" alt="" />
               <img class="c-gif" src="assets/placeholder_gif.gif" alt="" />
             </a>
+
+            <!-- PROJECT 7 -->
             <a href="project7.html" class="carousel-item">
               <img class="c-static" src="assets/placeholder_img.webp" alt="" />
               <img class="c-gif" src="assets/placeholder_gif.gif" alt="" />
             </a>
+
+            <!-- PROJECT 8 -->
             <a href="project8.html" class="carousel-item">
               <img class="c-static" src="assets/placeholder_img.webp" alt="" />
               <img class="c-gif" src="assets/placeholder_gif.gif" alt="" />
@@ -175,8 +276,6 @@
           </div>
         </div>
       </section>
-
-      <section class="spacer-section" id="target"></section>
 
       <section class="about-section" id="about">
         <div class="about-header-styled">
@@ -217,22 +316,24 @@ João Barbosa."
       <div class="marquee-track">
         <div class="marquee-content">
           <span
-            >VIARIAVEL Typeface is now being printed for letterpress type!
-            &nbsp;•&nbsp; Want to Know More? See a project in person? Contact
-            Me! &nbsp;•&nbsp;Available for freelance work &nbsp;•&nbsp; New
-            projects coming soon &nbsp;•&nbsp;</span
+            data-en="VIARIAVEL Typeface is now being printed... • Available for freelance work • New projects coming soon"
+            data-pt="A tipografia VIARIAVEL está a ser impressa... • Disponível para trabalho freelance • Novos projetos brevemente"
           >
+            A tipografia VIARIAVEL está a ser impressa... • Disponível para
+            trabalho freelance • Novos projetos brevemente
+          </span>
           <span
-            >VIARIAVEL Typeface is now being printed for letterpress type!
-            &nbsp;•&nbsp; Want to Know More? See a project in person? Contact
-            Me! &nbsp;•&nbsp;Available for freelance work &nbsp;•&nbsp; New
-            projects coming soon &nbsp;•&nbsp;</span
+            data-en="VIARIAVEL Typeface is now being printed... • Available for freelance work • New projects coming soon"
+            data-pt="A tipografia VIARIAVEL está a ser impressa... • Disponível para trabalho freelance • Novos projetos brevemente"
           >
+            A tipografia VIARIAVEL está a ser impressa... • Disponível para
+            trabalho freelance • Novos projetos brevemente
+          </span>
         </div>
       </div>
     </footer>
 
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
-
