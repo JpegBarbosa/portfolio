@@ -212,18 +212,8 @@ p {
 .nav-icon {
   width: 18px;
   height: 18px;
-
-  /* Removemos o fill: currentColor pois não funciona em <img> */
-  /* fill: currentColor;  <-- APAGA ISTO */
-
-  /* Adicionamos o filtro */
   filter: var(--icon-filter);
   transition: transform 0.2s;
-}
-
-/* Adiciona esta regra para mudar a cor no HOVER */
-.menu-item:hover .nav-icon {
-  filter: var(--icon-hover-filter);
 }
 
 .hide-on-hover {
@@ -272,12 +262,16 @@ p {
   border-radius: 2px;
   text-decoration: none;
   cursor: pointer;
+
+  /* Estado Inicial: Invisível e não clicável */
   opacity: 0;
+  pointer-events: none;
+
+  /* Transições suaves */
   transition:
     opacity 0.1s,
     background 0.2s,
     color 0.2s;
-  pointer-events: auto;
   font-size: 14px;
   white-space: nowrap;
 }
@@ -368,15 +362,15 @@ p {
   display: block;
 }
 
-/* SIDEBAR: Absolute vertical centering at the left margin */
+/* Update this block in your styles.css */
 .carousel-nav-sidebar {
   position: absolute;
-  left: 10px; /* Aligned with 'PORTFOLIO' button */
-  top: 50%;
-  transform: translateY(-50%);
+  left: 50%; /* Centers horizontally */
+  bottom: 80px; /* Increased from 40px to sit higher above the marquee */
+  transform: translateX(-50%); /* Ensures perfect centering */
   display: flex;
-  flex-direction: row; /* Arrows on the same line */
-  gap: 8px;
+  flex-direction: row; /* Keeps buttons side-by-side */
+  gap: 12px;
   z-index: 1100;
   pointer-events: auto;
 }
@@ -384,7 +378,8 @@ p {
 /* WRAPPER: Occupies the full section and centers the track */
 .carousel-interaction-wrapper {
   position: absolute;
-  top: 0;
+  /* Alterar de 0 para -10% ou -50px para "puxar" o carrossel para cima */
+  top: -50px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -454,6 +449,47 @@ p {
   }
   .carousel-section {
     perspective: 800px;
+  }
+}
+
+/* Container for the filter buttons */
+/* No teu styles.css */
+.carousel-filter-bar {
+  position: absolute;
+  /* Aumenta este valor para empurrar os botões para baixo */
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 1100;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+}
+
+/* Base style for the item transition */
+.carousel-item {
+  /* ... keep existing styles ... */
+  transition: opacity 0.5s ease; /* Animate the transparency change */
+}
+
+/* When an item is NOT in the selected category */
+.carousel-item.is-dimmed {
+  opacity: 0.2 !important; /* High transparency (dimmed) */
+  pointer-events: none; /* Optional: Disable clicks on dimmed items */
+}
+
+/* Active state for the filter buttons */
+.filter-btn.active {
+  background: var(--menu-hover-bg);
+  color: var(--menu-hover-text);
+}
+
+/* Mobile adjustment */
+@media (max-width: 900px) {
+  .carousel-filter-bar {
+    top: 80px; /* Lower on mobile to avoid overlap with header */
   }
 }
 
@@ -607,9 +643,9 @@ p {
 
 .about-section {
   width: 100%;
-  height: auto;
   background: var(--bg-color);
-  padding: 20px 20px;
+  /* Alinhamento: 110px à esquerda e à direita para bater com o marquee no desktop */
+  padding: 40px 110px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -635,44 +671,72 @@ p {
   color: var(--text-color);
 }
 
+@media (max-width: 900px) {
+  .about-section {
+    /* No mobile, o marquee usa 10px, logo estas secções também devem usar */
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+  }
+}
+
 /* =========================================
-   FOOTER MARQUEE (INFINITE)
+   FOOTER: DINÂMICO (MOBILE VS DESKTOP)
    ========================================= */
 .fixed-footer-marquee {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: var(--footer-bg);
-  color: var(--footer-text);
-  padding: 16px 0;
-  z-index: 15;
-  box-shadow: none;
+  bottom: 10px;
+
+  /* MOBILE DEFAULT: Margens coladas ao nav (10px) */
+  left: 10px;
+  right: 10px;
+
+  height: var(--menu-height);
+  background-color: var(--menu-bg);
+  color: var(--menu-text);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 25px;
+  z-index: 1000;
   text-transform: uppercase;
 }
 
+/* DESKTOP: Encolhe para alinhar após o botão 'Portfolio' */
+@media (min-width: 901px) {
+  .fixed-footer-marquee {
+    /* 10px (margem base) 
+           + ~85px (largura estimada do botão Portfolio) 
+           + 6px (gap) 
+           = ~101px. 
+           Ajusta o valor abaixo (110px) para bater visualmente com o teu design.
+        */
+    left: 110px;
+    right: 110px;
+  }
+}
+
+/* MANTÉM O RESTO IGUAL */
 .marquee-track {
+  display: flex;
   width: 100%;
   overflow: hidden;
-  white-space: nowrap;
-  display: flex;
 }
 
 .marquee-content {
   display: flex;
-  /* Animate content by -50% of its width */
-  animation: marquee-scroll 25s linear infinite;
+  animation: marquee-scroll 30s linear infinite;
+  will-change: transform;
 }
 
 .marquee-content span {
-  flex-shrink: 0;
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  padding-right: 20px; /* Space between repeated blocks */
+  font-family: "Inter", sans-serif;
+  font-size: 14px; /* MUDADO: de 13px para 14px */
+  letter-spacing: 0.3px; /* Igual ao Nav */
+  padding-right: 50px;
+  white-space: nowrap;
 }
 
-/* Move left by 50% (exactly one full set of text) */
 @keyframes marquee-scroll {
   0% {
     transform: translateX(0);
@@ -812,18 +876,18 @@ input[type="range"]::-webkit-slider-thumb {
   width: 100%;
 }
 
+/* Garante que as colunas também cortam o excesso de zoom */
 .media-col {
+  overflow: hidden !important;
   display: flex;
-  flex-direction: column;
-  /* 'flex' value will be set inline in HTML for customization */
-  overflow: hidden; /* Ensures content respects the border radius/width */
 }
 
+/* Força as imagens dentro das colunas a aceitarem a transformação */
 .media-col img,
 .media-col video {
-  width: 100%; /* Expands to the border of its column */
-  height: auto; /* Maintains aspect ratio */
-  display: block;
+  will-change: transform;
+  transform: scale(1.1);
+  transition: transform 0.1s ease-out;
 }
 
 .media-spacer-top {
@@ -913,6 +977,42 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .poster-item:hover .poster-text {
   opacity: 1;
+}
+
+/* =========================================
+   EDITORIAL SECTION - FIX ESPAÇO & TAMANHO
+   ========================================= */
+.editorial-section {
+  width: 100%;
+  background: var(--bg-color);
+  /* Alteramos o padding-bottom de 20px para 0 ou 5px */
+  padding: 10px 10px 5px 10px !important;
+  margin-top: 0 !important;
+  box-sizing: border-box;
+  display: block;
+}
+
+.editorial-text {
+  font-family: "Inter", sans-serif;
+  /* Tamanho a 75% do anterior */
+  font-size: clamp(1.5rem, 4.2vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--text-color);
+  /* REMOVE A MARGEM DO TOPO DO TEXTO */
+  margin-top: 0 !important;
+  margin-bottom: 0;
+  text-align: left !important;
+}
+
+/* Ajuste específico para Mobile para garantir que não há override */
+@media (max-width: 900px) {
+  .editorial-text {
+    /* Ajuste fino do tamanho no telemóvel */
+    font-size: 2.2rem;
+    line-height: 1.1;
+  }
 }
 
 /* Responsive: 2 columns on mobile */
@@ -1039,4 +1139,74 @@ input[type="range"]::-webkit-slider-thumb {
     width: 100%;
     justify-content: flex-end;
   }
+}
+
+/* 1. Removemos o .carousel-item daqui */
+.fullscreen-section,
+.media-block,
+.media-col,
+.poster-media {
+  overflow: hidden !important;
+  position: relative;
+}
+
+/* 2. Removemos o .carousel-item img daqui */
+.fullscreen-section img,
+.fullscreen-section video,
+.media-block img,
+.media-block video,
+.poster-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  transform: scale(1.1);
+  transition: transform 0.1s ease-out;
+}
+
+/* 3. Manter a tua estrutura de ROW intacta */
+.media-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* Impede saltos visuais e prepara a GPU */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Otimização de renderização para as imagens que fazem zoom */
+.fullscreen-section img,
+.media-block img,
+.poster-media img {
+  backface-visibility: hidden; /* Evita trepidação de pixéis */
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Remove o scroll "aos saltos" nativo para o Lenis assumir o controlo */
+@media (min-width: 901px) {
+  .scroll-section {
+    scrollbar-width: none; /* Esconde a scrollbar no Firefox */
+    -ms-overflow-style: none; /* Esconde no IE/Edge */
+  }
+  .scroll-section::-webkit-scrollbar {
+    display: none; /* Esconde no Chrome/Safari */
+  }
+}
+
+/* Garante que o conteúdo não vibra durante o scroll suave */
+.scroll-content {
+  will-change: transform;
 }
