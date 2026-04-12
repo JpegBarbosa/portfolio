@@ -1,1 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JP.PT</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=PT+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="menu">
+        <div class="menu-group-links">
+          <div class="menu-item" id="menu1">
+            <a href="index.html">PORTFOLIO</a>
+          </div>
+
+          <div class="menu-item" id="menu-about-me">
+            <a
+              href="index.html#target"
+              style="text-decoration: none; color: inherit"
+              >JOÃO BARBOSA</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group-tools">
+          <div
+            class="menu-item hide-on-hover"
+            id="lang-toggle"
+            title="Translate PT/EN"
+          >
+            <img
+              src="assets/icons/translate.svg"
+              class="nav-icon"
+              alt="Translate"
+            />
+          </div>
+
+          <div
+            class="menu-item hide-on-hover"
+            id="theme-toggle"
+            title="Toggle Dark/Light Mode"
+          >
+            <img src="assets/icons/bulb.svg" class="nav-icon" alt="Theme" />
+          </div>
+
+          <div class="menu-item menu4 hide-on-hover" title="Download CV">
+            <a href="#">
+              <img src="assets/icons/document.svg" class="nav-icon" alt="CV" />
+            </a>
+          </div>
+
+          <div
+            class="menu-item hide-on-hover"
+            id="btn-upward"
+            title="Go to Top"
+          >
+            <img src="assets/icons/up_arrow.svg" class="nav-icon" alt="Up" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="submenu" id="submenu1">
+      <a href="oficinal.html" class="submenu-box">OFICINAL</a>
+      <a href="project2.html" class="submenu-box">EDITORIAL</a>
+      <a href="type.html" class="submenu-box">TYPE</a>
+      <a href="project4.html" class="submenu-box">3D MODELING</a>
+      <a href="project5.html" class="submenu-box">PHOTOS</a>
+      <a href="project6.html" class="submenu-box">VIDEOS</a>
+      <a href="project7.html" class="submenu-box">INFOGRAPHS</a>
+      <a href="other.html" class="submenu-box">OTHER</a>
+    </div>
+
+    <div class="split-container">
+      <div class="gif-section">
+        <div class="floating-caption caption-proj">Project 1: Deep Dive</div>
+        <img
+          src="assets/placeholder_gif.gif"
+          alt="Animated GIF"
+          class="fixed-gif"
+        />
+      </div>
+      <div class="scroll-section">
+        <div class="scroll-content">
+          <h1 data-en="Deep Dive Project" data-pt="Projeto Deep Dive">
+            Deep Dive Project
+          </h1>
+
+          <p
+            data-en="This is a multidisciplinary project focusing on the intersection of digital and physical mediums. The goal was to explore how texture affects user perception in a digital environment."
+            data-pt="Este é um projeto multidisciplinar focado na interseção entre meios digitais e físicos. O objetivo foi explorar como a textura afeta a perceção do utilizador num ambiente digital."
+          >
+            This is a multidisciplinary project focusing on the intersection of
+            digital and physical mediums. The goal was to explore how texture
+            affects user perception in a digital environment.
+          </p>
+
+          <h1 data-en="Process & Tools" data-pt="Processo & Ferramentas">
+            Process & Tools
+          </h1>
+
+          <p
+            data-en="We utilized 3D modeling software alongside traditional printing techniques to achieve a unique visual language."
+            data-pt="Utilizámos software de modelação 3D juntamente com técnicas de impressão tradicionais para alcançar uma linguagem visual única."
+          >
+            We utilized 3D modeling software alongside traditional printing
+            techniques to achieve a unique visual language.
+          </p>
+
+          <p
+            data-en="The final result is a cohesive brand identity that speaks to both modern sensibilities and craft heritage."
+            data-pt="O resultado final é uma identidade de marca coesa que apela tanto às sensibilidades modernas como à herança artesanal."
+          >
+            The final result is a cohesive brand identity that speaks to both
+            modern sensibilities and craft heritage.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="fixed-footer-marquee half-width-footer">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span
+            data-en="News: New Design Project Released • Available for freelance work"
+            data-pt="Notícias: Novo Projeto de Design Lançado • Disponível para freelance"
+          >
+            Notícias: Novo Projeto de Design Lançado • Disponível para freelance
+          </span>
+          <span
+            data-en="News: New Design Project Released • Available for freelance work"
+            data-pt="Notícias: Novo Projeto de Design Lançado • Disponível para freelance"
+          >
+            Notícias: Novo Projeto de Design Lançado • Disponível para freelance
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
