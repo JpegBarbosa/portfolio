@@ -54,34 +54,41 @@
 :root {
   --bg-color: #ffffff;
   --text-color: #000000;
+
+  /* Menu / Nav */
   --menu-bg: #000000;
   --menu-text: #ffffff;
   --menu-hover-bg: #000000;
   --menu-hover-text: #ff00bf;
+
+  /* Footer / Marquee */
+  --footer-bg: #000000;
+  --footer-text: #ffffff;
+
+  /* Legenda do GIF (Caption) */
+  --caption-bg: #ffd700;
+  --caption-text: #000000;
+
+  /* Outros */
   --badge-bg: #e0e0e0;
   --badge-text: #000;
   --overlay-text: #fff;
-  --footer-bg: #d8ccff;
-  --footer-text: #222;
   --submenu-bg: #262626;
   --submenu-text: #fff;
   --submenu-hover-bg: #000000;
   --submenu-hover-text: #ff00bf;
 
-  /* NOVAS VARIAVEIS: Configuração de Espaçamento e Tamanho */
+  /* Espaçamento e Tamanho */
   --menu-padding: 5px 7px;
   --cv-badge-size: 35px;
   --menu-height: 35px;
 
-  /* NOVAS VARIAVEIS: Cores das Tags (para uso no JS) */
+  /* Cores das Tags (Index) */
   --color-tag-main: #4100f5;
   --color-tag-1: #00ff00;
   --color-tag-2: #64686a;
 
-  /* Se o menu é preto, precisamos de INVERTER o ícone preto para ficar BRANCO */
   --icon-filter: invert(1);
-
-  /* Filtro para transformar preto na tua cor rosa de hover (#ff00bf) */
   --icon-hover-filter: invert(13%) sepia(94%) saturate(5372%) hue-rotate(313deg)
     brightness(92%) contrast(116%);
 }
@@ -93,15 +100,78 @@
   --menu-text: #000000;
   --menu-hover-bg: #0000ff;
   --menu-hover-text: #ffffff;
+  --footer-bg: #ffffff;
+  --footer-text: #000000;
+  --caption-bg: #ffd700;
+  --caption-text: #000000;
   --badge-bg: #333333;
-  --badge-text: #fff;
-  --footer-bg: #333333;
-  --footer-text: #d8ccff;
   --submenu-bg: #d0d0d0;
   --submenu-text: #121212;
-  --submenu-hover-bg: #ff5f1f;
-  --submenu-hover-text: #ffffff;
+  --icon-filter: invert(0);
+}
 
+/* =========================================
+   PAGE-SPECIFIC COLOR OVERRIDES
+   ========================================= */
+
+/* --- OFICINAL PAGE --- */
+.page-oficinal {
+  --bg-color: #ff5e3a; /* The Orange */
+  --text-color: #51ff00;
+  --menu-bg: #ff5e3a; /* Menu becomes white to pop on orange */
+  --menu-text: #51ff00;
+  --footer-bg: #ff5e3a;
+  --footer-text: #51ff00;
+  --icon-filter: invert(0); /* Ensure icons are dark on white menu */
+}
+
+/* Dark Mode para Oficinal (Nota o espaço entre os seletores) */
+[data-theme="dark"] .page-oficinal {
+  --bg-color: #004d31;
+  --text-color: #d4ff00;
+  --menu-bg: #004d31;
+  --menu-text: #d4ff00;
+  --footer-bg: #004d31;
+  --icon-filter: invert(0);
+}
+
+/* --- TYPE PAGE --- */
+.page-type {
+  --bg-color: #ff5e3a; /* The Orange */
+  --text-color: #51ff00;
+  --menu-bg: #ff5e3a; /* Menu becomes white to pop on orange */
+  --menu-text: #51ff00;
+  --footer-bg: #ff5e3a;
+  --footer-text: #51ff00;
+  --icon-filter: invert(0); /* Ensure icons are dark on white menu */
+}
+
+/* Dark Mode para Type */
+[data-theme="dark"] .page-type {
+  --bg-color: #004d31;
+  --text-color: #d4ff00;
+  --menu-bg: #004d31;
+  --menu-text: #d4ff00;
+  --footer-bg: #004d31;
+  --icon-filter: invert(0);
+}
+
+.page-ligatures {
+  --bg-color: #ff5e3a; /* The Orange */
+  --text-color: #51ff00;
+  --menu-bg: #ff5e3a; /* Menu becomes white to pop on orange */
+  --menu-text: #51ff00;
+  --footer-bg: #ff5e3a;
+  --footer-text: #51ff00;
+  --icon-filter: invert(0); /* Ensure icons are dark on white menu */
+}
+
+[data-theme="dark"] .page-ligatures {
+  --bg-color: #004d31;
+  --text-color: #d4ff00;
+  --menu-bg: #004d31;
+  --menu-text: #d4ff00;
+  --footer-bg: #004d31;
   --icon-filter: invert(0);
 }
 
@@ -352,34 +422,44 @@ p {
    ========================================= */
 
 .carousel-section {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100vh; /* Ensures it occupies the full viewport height */
-  min-height: 100vh;
-  background: var(--bg-color);
-  position: relative; /* Anchor for absolute children */
-  overflow: hidden;
-  z-index: 10;
-  display: block;
+  height: 100%;
+  z-index: 2;
+  background: transparent !important;
+  pointer-events: none;
+  display: flex;
+  align-items: center; /* Centraliza verticalmente o anel 3D */
+  justify-content: center;
 }
 
-/* Update this block in your styles.css */
+/* Ajuste de posição dos botões de navegação do carrossel */
 .carousel-nav-sidebar {
   position: absolute;
-  left: 50%; /* Centers horizontally */
-  bottom: 80px; /* Increased from 40px to sit higher above the marquee */
-  transform: translateX(-50%); /* Ensures perfect centering */
+  /* Aumentado para 60px para limpar totalmente o topo do marquee (45px) */
+  bottom: 50px !important;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: row; /* Keeps buttons side-by-side */
-  gap: 12px;
+  gap: 10px;
   z-index: 1100;
   pointer-events: auto;
+}
+
+/* Garante que os botões e itens continuam clicáveis */
+.filter-btn,
+.carousel-item,
+.carousel-nav-sidebar {
+  pointer-events: auto !important;
 }
 
 /* WRAPPER: Occupies the full section and centers the track */
 .carousel-interaction-wrapper {
   position: absolute;
   /* Alterar de 0 para -10% ou -50px para "puxar" o carrossel para cima */
-  top: -50px;
+  top: 0px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -456,8 +536,8 @@ p {
 /* No teu styles.css */
 .carousel-filter-bar {
   position: absolute;
-  /* Aumenta este valor para empurrar os botões para baixo */
-  top: 80px;
+  top: auto; /* Remove a posição do topo */
+  bottom: 85px; /* Coloca-os logo acima do marquee (footer) */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -591,8 +671,8 @@ p {
 }
 
 .caption-proj {
-  background: #ffd700; /* Amarelo Ouro */
-  color: #000; /* Texto Preto */
+  background-color: var(--bg-color) !important; /* Forces it to match body bg */
+  color: var(--text-color) !important;
 }
 
 .spacer-section {
@@ -691,8 +771,8 @@ p {
   right: 10px;
 
   height: var(--menu-height);
-  background-color: var(--menu-bg);
-  color: var(--menu-text);
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -982,14 +1062,29 @@ input[type="range"]::-webkit-slider-thumb {
 /* =========================================
    EDITORIAL SECTION - FIX ESPAÇO & TAMANHO
    ========================================= */
-.editorial-section {
+/* 1. Contentor Principal de 100vh */
+.home-interactive-wrapper {
+  position: relative;
+  height: 100vh;
   width: 100%;
+  overflow: hidden; /* Impede scroll interno */
   background: var(--bg-color);
-  /* Alteramos o padding-bottom de 20px para 0 ou 5px */
-  padding: 10px 10px 5px 10px !important;
-  margin-top: 0 !important;
-  box-sizing: border-box;
-  display: block;
+}
+
+/* 2. Editorial Text: Começa após o Nav e fica por baixo */
+.editorial-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Padding superior aumentado para o texto começar após o menu (header ~60px) */
+  padding-top: 50px !important;
+  padding-left: 8px !important; /* Alinhado com o marquee desktop */
+  padding-right: 8px !important;
+  z-index: 1; /* Camada inferior */
+  background: transparent !important;
+  pointer-events: none; /* Permite clicar através do texto se necessário */
 }
 
 .editorial-text {
@@ -1004,6 +1099,43 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: 0 !important;
   margin-bottom: 0;
   text-align: left !important;
+}
+
+.editorial-text .filter-btn {
+  background: var(--menu-bg);
+  color: var(--menu-text);
+
+  /* Mantém o tamanho do texto editorial */
+  font-size: 0.95em;
+  text-transform: uppercase;
+
+  /* Alinhamento preciso para não quebrar a linha */
+  display: inline-block;
+  vertical-align: baseline;
+  position: relative;
+  top: -2px; /* Ajuste fino de 2px para centrar visualmente na linha */
+
+  padding: 0px 8px; /* Padding lateral fixo para o look 'cube' */
+  margin: 0 2px;
+
+  border-radius: 2px; /* Pixel-perfect com o nav */
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+/* Ajuste específico para o botão TODOS circular */
+.editorial-text .filter-btn[data-filter="all"] {
+  border-radius: 100px;
+  padding: 0px 12px;
+}
+
+/* Interação */
+.editorial-text .filter-btn:hover,
+.editorial-text .filter-btn.active {
+  background: var(--menu-hover-bg);
+  color: var(--menu-hover-text);
+  transform: translateY(-1px); /* Ajuste subtil para não saltar muito */
 }
 
 /* Ajuste específico para Mobile para garantir que não há override */
