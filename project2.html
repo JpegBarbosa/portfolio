@@ -3,10 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projeto_1</title>
+    <title>JP.PT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=PT+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-
   <body>
     <div class="header">
       <div class="menu">
@@ -16,9 +24,7 @@
           </div>
 
           <div class="menu-item" id="menu-about-me">
-            <a
-              href="index.html#about"
-              style="text-decoration: none; color: inherit"
+            <a href="about.html" style="text-decoration: none; color: inherit"
               >JOÃO BARBOSA</a
             >
           </div>
@@ -30,15 +36,11 @@
             id="lang-toggle"
             title="Translate PT/EN"
           >
-            <svg
+            <img
+              src="assets/icons/english.svg"
               class="nav-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12,23A11,11,0,1,1,23,12,11.013,11.013,0,0,1,12,23ZM12,3a9,9,0,1,0,9,9A9.01,9.01,0,0,0,12,3ZM8.293,16.707,5.586,14H10a1,1,0,0,0,0-2H5.586l2.707-2.707A1,1,0,1,0,6.879,7.879l-4.4,4.414a1,1,0,0,0,0,1.414l4.4,4.414a1,1,0,0,0,1.414-1.414ZM18.414,10H14a1,1,0,0,0,0,2h4.414l-2.707,2.707a1,1,0,1,0,1.414,1.414l4.4-4.414a1,1,0,0,0,0-1.414l-4.4-4.414a1,1,0,0,0-1.414,1.414Z"
-              />
-            </svg>
+              alt="Translate"
+            />
           </div>
 
           <div
@@ -46,28 +48,16 @@
             id="theme-toggle"
             title="Toggle Dark/Light Mode"
           >
-            <svg
-              class="nav-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12,2A10,10,0,1,0,22,12,10.011,10.011,0,0,0,12,2Zm0,18V4a8,8,0,0,1,0,16Z"
-              />
-            </svg>
+            <img src="assets/icons/bulb.svg" class="nav-icon" alt="Theme" />
           </div>
 
-          <div class="menu-item menu4 hide-on-hover" title="Download CV">
-            <a href="#">
-              <svg
-                class="nav-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M14,14H10a1,1,0,0,0,0,2h4a1,1,0,0,0,0-2Zm0-4H10a1,1,0,0,0,0,2h4a1,1,0,0,0,0-2Zm-5,8h1a1,1,0,0,0,0-2H9a1,1,0,0,0,0,2ZM20,8.94a1.315,1.315,0,0,0-.06-.27v-.01a1.042,1.042,0,0,0-.2-.33l-7-7a1.042,1.042,0,0,0-.33-.21A1.16,1.16,0,0,0,12.23,1H6A3,3,0,0,0,3,4V20a3,3,0,0,0,3,3H18a3,3,0,0,0,3-3V9A1.365,1.365,0,0,0,20,8.94ZM13,4.414,16.586,8H14a1,1,0,0,1-1-1ZM19,20a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V4A1,1,0,0,1,6,3h5V7a3,3,0,0,0,3,3h4Z"
-                />
-              </svg>
+          <div class="menu-item menu4 hide-on-hover" title="CV">
+            <a
+              href="assets/CV_PT.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src="assets/icons/document.svg" class="nav-icon" alt="CV" />
             </a>
           </div>
 
@@ -76,30 +66,21 @@
             id="btn-upward"
             title="Go to Top"
           >
-            <svg
-              class="nav-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M17.707,10.293a1,1,0,0,0-1.414,0L13,13.586V2a1,1,0,0,0-2,0V13.586l-3.293-3.293a1,1,0,0,0-1.414,1.414l5,5a1,1,0,0,0,1.414,0l5-5A1,1,0,0,0,17.707,10.293Z"
-                transform="translate(0 24) scale(1 -1)"
-              />
-            </svg>
+            <img src="assets/icons/up_arrow.svg" class="nav-icon" alt="Up" />
           </div>
         </div>
       </div>
     </div>
 
     <div class="submenu" id="submenu1">
-      <a href="project1.html" class="submenu-box">BRANDING</a>
-      <a href="project2.html" class="submenu-box">EDITORIAL</a>
-      <a href="project3.html" class="submenu-box">TYPE</a>
+      <a href="oficinal.html" class="submenu-box">OFICINAL</a>
+      <a href="ligatures_2026.html" class="submenu-box">LSS_2026</a>
+      <a href="type.html" class="submenu-box">TYPE</a>
       <a href="project4.html" class="submenu-box">3D MODELING</a>
       <a href="project5.html" class="submenu-box">PHOTOS</a>
       <a href="project6.html" class="submenu-box">VIDEOS</a>
       <a href="project7.html" class="submenu-box">INFOGRAPHS</a>
-      <a href="project8.html" class="submenu-box">OTHER</a>
+      <a href="other.html" class="submenu-box">OTHER</a>
     </div>
 
     <div class="split-container">
